@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, startTransition } from 'react';
+import Worker from './Worker';
+import Task from './Task';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Fire from './firebase'
+import 'firebase/compat/database';
+import Login from './login';
+import ProtectedRoute from './protected';
+import AdminWindow from './AdminWindow';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+<Router>
+      
+        <Routes>
+        <Route exact path="/" element={<Login />}/>
+        
+        <Route exact path="/admin" element={<ProtectedRoute ProtectedComponent={<AdminWindow />} />}/>
+          
+         
+        </Routes>
+     
+    </Router>
+      {/* <AdminWindow />
+      {allWorkers.map(worker => (
+        <WorkerWindow key={worker.id} worker={worker} />
+      ))} */}
     </div>
   );
 }
